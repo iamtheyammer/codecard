@@ -110,9 +110,13 @@ void loadDefaults(){
 }
 
 void evalInput(String input) {
-
-  String key = parseValue(input, '=', 0);
-  String val = parseValue(input, '=', 1);
+  // get the location of the first equals sign
+  int firstEqualsLoc = input.indexOf("=");
+  // the beginning of the string until the equals sign
+  String key = input.substring(0, firstEqualsLoc);
+  // after the first equals sign to the end of the string
+  String val = firstEqualsLoc == -1 ? "" : input.substring(firstEqualsLoc + 1);
+  
   if (key == "ls" || key == "ll") { listAll(); return; }
   if (key == "help") { help(); return; }
   if (key == "eraseall") { eraseAll(); return; } // not displayed under help
